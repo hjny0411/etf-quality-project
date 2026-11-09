@@ -1,0 +1,13 @@
+
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# SQLite temporary files
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Database backups
+*_backup.db*
