@@ -28,6 +28,13 @@ print("ETF 개수:", df["ticker"].nunique())
 # sort_values-종목별, 날짜별 정렬/ groupby-ETF별로 데이터 분리/ pet_change()-전 거래일 대비 수익률 계산/ daily_return-계산한 수익률 저장
 df= df.sort_values(["ticker", "date"]) 
 df["daily_return"] = df.groupby("ticker")["adj_close"].pct_change()
+abnormal = df[df["daily_return"].abs() > 0.20]
+print("\n일별 수익률 ±20 초과 데이터")
+print(abnormal[["ticker", "date", "adj_close", "daily_return"]])
+# abs()- 수익률의 절댓값을 구함. 상승과 하락을 모두 검사하기 위해 사용.
+# > 0.20 - 일별 수익률이 +20%를 초과하거나 -20%보다 낮은 데이터를 찾는 조건이다
+# abnormal - 검토가 필요한 데이터를 저장하는 변수
+print(df.loc[178:186,["ticker", "date", "adj_close", "daily_return"]])
 print(df[["ticker", "date", "adj_close", "daily_return"]].head(10))
 
 # ETF 누적수익률 계산
@@ -82,3 +89,12 @@ results_dir.mkdir(exist_ok=True)
 summary.to_csv(results_dir / "etf_summary.csv", encoding="utf-8-sig")
 
 print("ETF 종합 평가표 CSV 저장 완료!")
+
+# 시장가격과 수정종가 비교 
+query = """ SELECT ticker, date, close, adj_close FROM etf_prices WHERE ticker = '069500.KS' AND date BETWEEN'2026-07-29' AND '2026-08-04' ORDER BY date"""
+
+with sqlite3.connect("etf_quality.db") as conn:
+    price_check = pd.read_sql_query(query, conn)
+    
+print("\nKODEX 200 종가와 수정종가 비교")
+print(price_check)
