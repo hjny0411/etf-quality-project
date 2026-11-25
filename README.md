@@ -184,4 +184,4 @@ SQL 품질 검증에서 종가와 수정종가의 차이가 1%를 초과하는 �
 또한 1%라는 임의 탐지 기준만으로는 현상의 일부만 확인될 수 있음을 확인했다.
 향후에는 차이의 크기가 아닌 차이가 변하는 시점을 기준으로 조정 이벤트를 탐지하는 방식으로 개선할 예정이다.
 
-출처: 삼성자산운용 KODEX 미국나스닥100 분배금 내역 [https://www.samsungfund.com/etf/product/view.do?id=2ETFE3]
+출처: 삼성자산운용 KODEX 미국나스닥100 분배금 내역 https://www.samsungfund.com/etf/product/view.do?id=2ETFE3

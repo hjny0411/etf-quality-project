@@ -46,7 +46,7 @@ FROM etf_prices
 WHERE ticker = '379810.KS';
 
 -- 나스닥100 수정종가 조정 구간(분배금 누적 반영 확인)
-SELECT ROUND((close - adj_close) * 100.0 / close, 2) AS diff_pct, COUNT(*) AS 거래일수, MIN(date) AS 시작일, MAX(date) AS 종료일
+SELECT ROUND((close - adj_close) * 100.0 / close, 2) AS diff_pct, COUNT(*) AS trading_day, MIN(date) AS start_date, MAX(date) AS end_date
 FROM etf_prices
 WHERE ticker = '379810.KS'
 GROUP BY ROUND((close - adj_close) * 100.0 / close, 2)
