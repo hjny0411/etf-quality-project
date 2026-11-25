@@ -43,4 +43,11 @@ GROUP BY ticker;
 -- 패턴 확인
 SELECT ticker, date, close, adj_close, (close - adj_close) * 100.0 / close AS diff_pct
 FROM etf_prices
-WHERE ticker = '379810.KS';
+WHERE ticker = '379810.KS';git
+
+-- 나스닥100 수정종가 조정 구간(분배금 누적 반영 확인)
+SELECT ROUND((close - adj_close) * 100.0 / close, 2) AS diff_pct, COUNT(*) AS 거래일수, MIN(date) AS 시작일, MAX(date) AS 종료일
+FROM etf_prices
+WHERE ticker = '379810.KS'
+GROUP BY ROUND((close - adj_close) * 100.0 / close, 2)
+ORDER BY MIN(date);
