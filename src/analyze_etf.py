@@ -10,15 +10,9 @@ df = pd.read_sql_query(query, conn)
 
 conn.close()
 
-
-
-
-
 df["date"] = pd.to_datetime(df["date"], format= "%Y-%m-%d")
 
 
-
-print(df.head())
 print("데이터 개수:", len(df))
 print("ETF 개수:", df["ticker"].nunique())
 
@@ -31,7 +25,7 @@ print(abnormal[["ticker", "date", "adj_close", "daily_return"]])
 
 # ETF 누적수익률 계산
 df["cumulative_return"] = (1 + df["daily_return"]).groupby(df["ticker"]).cumprod() -1
-print(df[["ticker", "date", "daily_return", "cumulative_return"]].head(10))
+
 
 # 연율화 변동성 계산
 import numpy as np
