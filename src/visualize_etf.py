@@ -34,7 +34,7 @@ plt.axhline(0, color="gray", linestyle="--", linewidth=0.8)
 plt.title("ETF Cumulative Returns")
 plt.xlabel("Date")
 plt.ylabel("Cumulative_return (%)")
-plt.legend
+plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
